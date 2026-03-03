@@ -309,11 +309,22 @@ export function PapersSection() {
     )
   }
 
+  // Calculate total papers across all departments
+  const totalPapers = Object.values(paginationByDept).reduce((sum, pagination) => sum + pagination.total, 0)
+
   return (
     <div className="bg-slate-50 min-h-screen">
       <PageHeader title="Papers" subtitle="Manage papers by department" />
 
       <div className="px-4 md:px-8 py-8 md:py-12">
+        {/* Total Papers Count */}
+        <div className="mb-6 bg-white border border-slate-200 px-6 py-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-medium text-slate-950">Total Papers</h2>
+            <span className="text-2xl font-semibold text-slate-950">{totalPapers}</span>
+          </div>
+        </div>
+
         <div className="space-y-3">
           {allDepartments.map((dept) => {
             const isExpanded = expandedDepts.has(dept.departmentId)
