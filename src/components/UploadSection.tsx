@@ -245,7 +245,7 @@ export function UploadSection() {
             <PaperDetailsForm
               currentPaper={currentPaper}
               setCurrentPaper={setCurrentPaper}
-              onBack={() => setStage('upload')}
+              onBack={() => setStage('editor')}
               onSubmit={createPaper}
               isSubmitting={creatingPaper}
               submitButtonText="Create Paper"
