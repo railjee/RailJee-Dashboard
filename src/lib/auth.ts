@@ -1,17 +1,42 @@
+import { API_ENDPOINTS } from "./api";
+
 export interface User {
+  id: string;
   username: string;
   userType: 'admin';
+  access_token: string;
 }
 
-export function validateCredentials(username: string, password: string): User | null {
-  const envUsername = process.env.NEXT_PUBLIC_DASHBOARD_USERNAME;
-  const envPassword = process.env.NEXT_PUBLIC_DASHBOARD_PASSWORD;
+export async function validateCredentials(username: string, password: string): Promise<User | null> {
+  try {
+    const response = await fetch(API_ENDPOINTS.signIn, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
 
-  if (username === envUsername && password === envPassword) {
-    return { username, userType: 'admin' };
+    if (!response.ok) {
+      return null;
+    }
+
+    const result = await response.json();
+    
+    if (result.success && result.data) {
+      return {
+        id: result.data.user.id,
+        username: result.data.user.username,
+        userType: result.data.user.userType,
+        access_token: result.data.access_token,
+      };
+    }
+
+    return null;
+  } catch (error) {
+    console.error('Login error:', error);
+    return null;
   }
-
-  return null;
 }
 
 export function saveSession(user: User): void {

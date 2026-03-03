@@ -11,18 +11,26 @@ export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setLoading(true);
 
-    const user = validateCredentials(username, password);
-    
-    if (user) {
-      saveSession(user);
-      onLoginSuccess();
-    } else {
-      setError('Invalid username or password');
+    try {
+      const user = await validateCredentials(username, password);
+      
+      if (user) {
+        saveSession(user);
+        onLoginSuccess();
+      } else {
+        setError('Invalid username or password');
+      }
+    } catch (err) {
+      setError('Failed to sign in. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,7 +63,8 @@ export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="input-minimal"
+                disabled={loading}
+                className="input-minimal disabled:opacity-50"
               />
             </div>
             <div>
@@ -69,7 +78,8 @@ export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="input-minimal"
+                disabled={loading}
+                className="input-minimal disabled:opacity-50"
               />
             </div>
           </div>
@@ -82,9 +92,10 @@ export default function LoginForm({ onLoginSuccess }: LoginFormProps) {
 
           <button
             type="submit"
-            className="w-full py-2.5 px-4 border border-slate-900 text-sm font-medium text-slate-50 bg-slate-900 hover:bg-slate-800 transition-colors"
+            disabled={loading}
+            className="w-full py-2.5 px-4 border border-slate-900 text-sm font-medium text-slate-50 bg-slate-900 hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Sign in
+            {loading ? 'Signing in...' : 'Sign in'}
           </button>
         </form>
       </div>

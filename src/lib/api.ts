@@ -7,6 +7,9 @@ const DASHBOARD_API_BASE_URL =
   'https://railji-dashboard.onrender.com/dashboard/v1'
 
 export const API_ENDPOINTS = {
+  // Auth
+  signIn: `${DASHBOARD_API_BASE_URL}/auth/sign-in`,
+  
   // Departments
   departments: `${BUSINESS_API_BASE_URL}/departments`,
   
