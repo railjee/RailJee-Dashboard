@@ -5,6 +5,7 @@ import { Trash2, ChevronDown, ChevronRight, Loader2, AlertCircle, ToggleLeft, To
 import { PageHeader } from './PageHeader'
 import { useRouter } from 'next/navigation'
 import { API_ENDPOINTS } from '@/lib/api'
+import { getSession } from '@/lib/auth'
 
 interface Department {
   departmentId: string
@@ -228,8 +229,18 @@ export function PapersSection() {
     
     setDeletingPaper(paperId)
     try {
+      const user = getSession()
+      if (!user) {
+        alert('User not authenticated')
+        return
+      }
+      
       const response = await fetch(API_ENDPOINTS.deletePaper(paperId), {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: user.username }),
       })
       if (!response.ok) throw new Error('Failed to delete paper')
       

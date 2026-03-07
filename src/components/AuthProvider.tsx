@@ -42,7 +42,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <LayoutWrapper onLogout={handleLogout}>
+    // pass the current user down so the sidebar can display their info
+    <LayoutWrapper user={user} onLogout={handleLogout}>
       {children}
     </LayoutWrapper>
   );

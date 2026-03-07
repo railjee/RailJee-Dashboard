@@ -2,15 +2,19 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { FileText, BookOpen, Users, Home, BarChart3, X, LogOut } from 'lucide-react'
+import { FileText, BookOpen, Users, User, Home, BarChart3, X, LogOut } from 'lucide-react'
 
 interface SidebarProps {
   isOpen?: boolean
   onClose?: () => void
   onLogout?: () => void
+  // current user information for display
+  user?: {
+    username: string
+  } | null
 }
 
-export function Sidebar({ isOpen = true, onClose, onLogout }: SidebarProps) {
+export function Sidebar({ isOpen = true, onClose, onLogout, user }: SidebarProps) {
   const pathname = usePathname()
 
   const isActive = (path: string) => pathname === path
@@ -107,6 +111,7 @@ export function Sidebar({ isOpen = true, onClose, onLogout }: SidebarProps) {
 
       {/* Footer */}
       <div className="px-4 py-6 border-t border-slate-700 space-y-4">
+        {/* system status */}
         <div className="space-y-2">
           <p className="text-xs text-slate-400">System Status</p>
           <div className="flex items-center gap-2">
@@ -114,7 +119,15 @@ export function Sidebar({ isOpen = true, onClose, onLogout }: SidebarProps) {
             <p className="text-xs text-slate-300">All systems operational</p>
           </div>
         </div>
-        
+
+        {/* current user info, styled like a nav item */}
+        {user && (
+          <div className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-300 rounded hover:bg-slate-800 transition-colors duration-200">
+            <User className="w-4 h-4" />
+            <span>{user.username}</span>
+          </div>
+        )}
+
         {onLogout && (
           <button
             onClick={onLogout}
