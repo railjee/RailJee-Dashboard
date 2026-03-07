@@ -21,12 +21,12 @@ export function Dashboard() {
       icon: UsersIcon,
       change: '+142 this month',
     },
-    {
+  /*{
       label: 'Papers Uploaded',
       value: '342',
       icon: TrendingUp,
       change: '+58 this month',
-    },
+    },*/
   ]
 
   return (
@@ -34,7 +34,7 @@ export function Dashboard() {
       {/* Header */}
       <PageHeader
         title="Dashboard"
-        subtitle="Overview of your paper system"
+        subtitle="Overview of the Railji system"
       />
 
       {/* Main Content */}
@@ -48,21 +48,16 @@ export function Dashboard() {
           </div>
         </section>
 
-        {/* Track divider */}
-        <div className="track"></div>
-
         {/* Middle section - Timeline and Recent Activity */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Timeline - Main focus */}
+        {/* <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <PaperTimeline />
           </div>
 
-          {/* Active Users */}
           <div className="lg:col-span-1">
             <ActiveUsers />
           </div>
-        </section>
+        </section> */}
 
         {/* Track divider */}
         <div className="track"></div>
