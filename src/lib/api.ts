@@ -35,5 +35,5 @@ export const API_ENDPOINTS = {
     `${DASHBOARD_API_BASE_URL}/papers/${paperId}`,
   deletePaper: (paperId: string) =>
     `${DASHBOARD_API_BASE_URL}/papers/${paperId}`,
-  paperLogs: `${DASHBOARD_API_BASE_URL}/papers/logs`,
+  paperLogs: `${DASHBOARD_API_BASE_URL}/papers/stats`,
 };
