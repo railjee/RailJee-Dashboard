@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { Loader2, AlertCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { PageHeader } from '@/components/PageHeader'
-import { PaperJsonEditor } from '@/components/PaperJsonEditor'
+import { PaperJsonEditor, Question } from '@/components/PaperJsonEditor'
 import { PaperDetailsForm } from '@/components/PaperDetailsForm'
 import { API_ENDPOINTS } from '@/lib/api'
 import { apiClient, getErrorMessage } from '@/lib/api-client'
@@ -28,7 +28,7 @@ interface PaperData {
     name: string
     size: string
     uploadTime: string
-    content: unknown
+    content: Question[] | { questions: Question[] }
   } | null
 }
 

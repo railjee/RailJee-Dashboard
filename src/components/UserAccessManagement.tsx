@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { ArrowLeft, User, RefreshCw, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { PageHeader } from './PageHeader'
-import { Button } from './ui/button'
 import { UsersAPI, User as UserType } from '@/lib/users-api'
 import { DepartmentPapersList } from './DepartmentPapersList'
 

@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback, useRef, useEffect } from 'react'
 import { ArrowLeft, Plus, Trash2, Copy, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-interface Question {
+export interface Question {
   id?: number
   ques?: string
   question?: { en: string; hi: string }

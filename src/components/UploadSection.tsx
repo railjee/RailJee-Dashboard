@@ -5,7 +5,7 @@ import { Upload, Check } from 'lucide-react'
 import { toast } from 'sonner'
 import { PageHeader } from './PageHeader'
 import { Button } from './ui/button'
-import { PaperJsonEditor } from './PaperJsonEditor'
+import { PaperJsonEditor, Question } from './PaperJsonEditor'
 import { PaperDetailsForm } from './PaperDetailsForm'
 import { API_ENDPOINTS } from '@/lib/api'
 import { getSession } from '@/lib/auth'
@@ -24,7 +24,7 @@ interface PaperData {
   negativeMarks: number | ''
   duration: number | ''
   isFree: boolean
-  jsonFile: { name: string; size: string; uploadTime: string; content: unknown } | null
+  jsonFile: { name: string; size: string; uploadTime: string; content: Question[] | { questions: Question[] } } | null
 }
 
 const INITIAL_PAPER: PaperData = {

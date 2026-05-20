@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { ChevronDown, ChevronRight, Loader2, AlertCircle, ToggleLeft, ToggleRight, Trash2 } from 'lucide-react'
-import { toast } from 'sonner'
 import { Button } from './ui/button'
 import { Badge } from './ui/badge'
 import { Pagination } from './ui/pagination'
